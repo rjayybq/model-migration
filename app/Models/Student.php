@@ -21,10 +21,15 @@ class Student extends Model
         'zip',
         'birthdate',
     ];
-    //protected $guarded['zip'];
-    //protected $appends = ['fullname'];
-   // public function getFullnameAttribute()
-   // {
-    //    return $this->fname . ' ' . $this->lname;
-   // }
+    
+    protected $appends = ['fullname'];
+        public function getFullnameAttribute()
+   {
+       return $this->fname . ' ' . $this->lname;
+   }
+    //Relationship grade to Students
+   public function grades()
+    {
+        return $this->hasMany(SubjectGrade::class, 'student_id');
+    }
 }

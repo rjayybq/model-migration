@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\SubjectGrade;
 use Illuminate\Http\Request;
 
 class StudentContoller extends Controller
@@ -23,6 +24,7 @@ class StudentContoller extends Controller
                   //->orWhere('province', 'Maryland')
                  // ->orWhere('lname', 'Miller' )
                   //->get();
+
             //Select the Data Where in All start with P
        // return Student::Where('fname', 'like', '%p%')->get();
 
@@ -34,15 +36,23 @@ class StudentContoller extends Controller
 
             // Limit Student Data
             //return Student::limit(7)->get();
+
             // Display Odd ID
            // return Student::whereIn('id', [1,3,5,7,9,11])->get();
+
             //Display Odd Even
             //return Student::whereNotIn('id', [1,3,5,7,9,11])->get();
+
             //Display the First Student data Province
            // return Student::where('province', 'Georgia')->first();
-           //Display Student ID 25
-           
 
+           
+           // For Relationsip
+          //  return Student::with('grades')->get();
+          //
+          return Student::with(['grades' => function($query){
+                return $query->where('grade', '>=', 90);
+          }])->get();
 
     }
 
@@ -71,7 +81,7 @@ class StudentContoller extends Controller
         //return Student::find($id);
 
         //Display the Fname and Lname
-        $student =  Student::find($id);
+        //$student =  Student::find($id);
         //return $student->fname . ' ' .  $student ->lname;
         //return $student->fullname;
     }
@@ -99,4 +109,5 @@ class StudentContoller extends Controller
     {
         //
     }
+    
 }
