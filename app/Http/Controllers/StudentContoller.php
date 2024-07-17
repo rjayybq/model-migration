@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentContoller extends Controller
@@ -11,7 +12,38 @@ class StudentContoller extends Controller
      */
     public function index()
     {
-        //
+        //Select all Student Data
+        //return Student::all();
+
+            //AND
+        //return Student::where('province','South Carolina')->get();
+
+            //OR
+        //return Student::where('province','Georgia')
+                  //->orWhere('province', 'Maryland')
+                 // ->orWhere('lname', 'Miller' )
+                  //->get();
+            //Select the Data Where in All start with P
+       // return Student::Where('fname', 'like', '%p%')->get();
+
+            //Order Ascending
+         // return Student::orderBy('fname')->get();
+
+            //Order Desascending
+            //return Student::orderBy('fname', "desc")->get();
+
+            // Limit Student Data
+            //return Student::limit(7)->get();
+            // Display Odd ID
+           // return Student::whereIn('id', [1,3,5,7,9,11])->get();
+            //Display Odd Even
+            //return Student::whereNotIn('id', [1,3,5,7,9,11])->get();
+            //Display the First Student data Province
+           // return Student::where('province', 'Georgia')->first();
+           //Display Student ID 25
+           
+
+
     }
 
     /**
@@ -35,7 +67,13 @@ class StudentContoller extends Controller
      */
     public function show(string $id)
     {
-        //
+        //Display The Student ID
+        //return Student::find($id);
+
+        //Display the Fname and Lname
+        $student =  Student::find($id);
+        //return $student->fname . ' ' .  $student ->lname;
+        //return $student->fullname;
     }
 
     /**
