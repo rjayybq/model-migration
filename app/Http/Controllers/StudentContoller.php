@@ -14,7 +14,9 @@ class StudentContoller extends Controller
     public function index()
     {
         //Select all Student Data
-        return Student::all();
+       // return Student::all();
+       $data['students'] = Student::all();
+       return view('students.index', $data);
 
             //AND
         //return Student::where('province','South Carolina')->get();
@@ -61,7 +63,7 @@ class StudentContoller extends Controller
      */
     public function create()
     {
-        //
+        return view('students.create');
     }
 
     /**
@@ -80,6 +82,8 @@ class StudentContoller extends Controller
        $student-> zip           = $request['zip'];
        $student-> birthdate     = $request['birthdate'];
        $student-> save();
+
+       return redirect()->to('students');
     }
 
     /**
@@ -101,7 +105,8 @@ class StudentContoller extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['students'] = Student::find($id);
+        return view('students.edit', $data);
     }
 
     /**
@@ -120,7 +125,8 @@ class StudentContoller extends Controller
        $student-> zip           = $request['zip'];
        $student-> birthdate     = $request['birthdate'];
        $student-> save();
-
+       
+        return redirect()->back();
     }
 
     /**
@@ -130,6 +136,7 @@ class StudentContoller extends Controller
     {
         $student = Student::find($id);
         $student->delete();
+        return redirect()->to('students');
     }
     
 }
